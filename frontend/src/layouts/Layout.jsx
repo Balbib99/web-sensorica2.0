@@ -13,34 +13,34 @@ function Layout(props) {
 
     useEffect(() => {
         // Verificar si la ruta actual no es "/signin"
-        if (location.pathname === '/signin') {
+        if (location.pathname === '/signin' || location.pathname === '/') {
             setIsLoggedIn(false);
         } else {
             setIsLoggedIn(true);
         }
     }, [location]);
 
-    const handleSignOut = async () => {
+    // const handleSignOut = async () => {
 
-        try {
+    //     try {
 
-            const { error } = await supabase.auth.signOut()
-            console.log(error);
+    //         const { error } = await supabase.auth.signOut()
+    //         console.log(error);
 
-            // Verificar si se han recibido los datos correctamente
-            if (error == null) {
+    //         // Verificar si se han recibido los datos correctamente
+    //         if (error == null) {
 
-                setIsLoggedIn(false);
-                navigate('/signin');
+    //             setIsLoggedIn(false);
+    //             navigate('/signin');
 
-            }
+    //         }
 
-        } catch (error) {
+    //     } catch (error) {
 
-            console.error('Error al desloguear usuario', error);
-        
-        }
-    };
+    //         console.error('Error al desloguear usuario', error);
+
+    //     }
+    // };
 
     return (
         <>
@@ -49,24 +49,31 @@ function Layout(props) {
                     <a href="/" className="hidden sm:block font-semibold dark:text-white">Astro</a>
                     <div>
                         <ul className="font-medium flex items-baseline gap-8">
-                            <li>
-                                {isLoggedIn && (
-                                    // <a href="/dashboard" className="block text-zinc-900 dark:text-gray-200">Dashboard</a>
-                                    <Link to='/dashboard' className="block text-zinc-900 dark:text-gray-200">Dashboard</Link>
-                                )}
-                            </li>
-                            <li>
-                                <a href="/register" className="block text-zinc-900 dark:text-gray-200">Register</a>
-                            </li>
-                            <li>
-                                {/* <a href="/signin" className="block text-zinc-900 dark:text-gray-200">Sign in</a> */}
-                                <Link to='/signin' className="block text-zinc-900 dark:text-gray-200">Sign in</Link>
-                            </li>
-                            <li>
-                                {isLoggedIn && (
-                                    <button onClick={handleSignOut} className="block text-zinc-900 dark:text-gray-200">Sign out</button>
-                                )}
-                            </li>
+
+                            {isLoggedIn ? (
+                                <>
+                                    <li>
+                                        <Link to='/dashboard' className="block text-zinc-900 dark:text-gray-200">Dashboard</Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to='/signout' className="block text-zinc-900 dark:text-gray-200">Sign out</Link>
+                                    </li>
+                                </>
+                            ) : (
+
+                                <>
+                                    <li>
+                                        <Link to='/register' className="block text-zinc-900 dark:text-gray-200">Register</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/signin' className="block text-zinc-900 dark:text-gray-200">Sign in</Link>
+                                    </li>
+
+                                </>
+
+                            )}
+
                         </ul>
                     </div>
                 </div>
