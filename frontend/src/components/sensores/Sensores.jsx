@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { InfluxDB } from "@influxdata/influxdb-client";
 import Chart from 'chart.js/auto';
+import * as XLSX from 'xlsx';
 
 export const Sensores = ({ parameter, id, maxValue, minValue }) => {
 
