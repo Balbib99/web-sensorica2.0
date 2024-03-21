@@ -12,7 +12,7 @@ function Layout(props) {
 
     useEffect(() => {
         // Verificar si la ruta actual no es "/signin"
-        if (location.pathname == '/signin') {
+        if (location.pathname === '/signin') {
             setIsLoggedIn(false);
         } else {
             setIsLoggedIn(true);
@@ -49,7 +49,9 @@ function Layout(props) {
                     <div>
                         <ul className="font-medium flex items-baseline gap-8">
                             <li>
-                                <a href="/dashboard" className="block text-zinc-900 dark:text-gray-200">Dashboard</a>
+                                {isLoggedIn && (
+                                    <a href="/dashboard" className="block text-zinc-900 dark:text-gray-200">Dashboard</a>
+                                )}
                             </li>
                             <li>
                                 <a href="/register" className="block text-zinc-900 dark:text-gray-200">Register</a>
@@ -59,7 +61,7 @@ function Layout(props) {
                             </li>
                             <li>
                                 {isLoggedIn && (
-                                    <button onClick={handleSignOut}>Sign out</button>
+                                    <button onClick={handleSignOut} className="block text-zinc-900 dark:text-gray-200">Sign out</button>
                                 )}
                             </li>
                         </ul>

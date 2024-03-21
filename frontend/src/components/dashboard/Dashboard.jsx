@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout';
 import { useNavigate } from "react-router-dom";
 import { createClient } from '@supabase/supabase-js';
 import { Sensores } from '../sensores/Sensores';
+import { SearchSaveMeasurement } from '../sensores/SearchSaveMeasurement';
 
 export const Dashboard = () => {
 
@@ -60,9 +61,9 @@ export const Dashboard = () => {
                 minValue="10"
             /> */}
         </div>
-        {/* <div class="min-h-screen flex justify-center items-center">
-            <SearchSaveMeasurement/>
-        </div> */}
+        <div className="min-h-screen flex justify-center items-center">
+            <SearchSaveMeasurement />
+        </div>
     </div>
     </>
   )
