@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Layout(props) {
 
@@ -50,14 +51,16 @@ function Layout(props) {
                         <ul className="font-medium flex items-baseline gap-8">
                             <li>
                                 {isLoggedIn && (
-                                    <a href="/dashboard" className="block text-zinc-900 dark:text-gray-200">Dashboard</a>
+                                    // <a href="/dashboard" className="block text-zinc-900 dark:text-gray-200">Dashboard</a>
+                                    <Link to='/dashboard' className="block text-zinc-900 dark:text-gray-200">Dashboard</Link>
                                 )}
                             </li>
                             <li>
                                 <a href="/register" className="block text-zinc-900 dark:text-gray-200">Register</a>
                             </li>
                             <li>
-                                <a href="/signin" className="block text-zinc-900 dark:text-gray-200">Sign in</a>
+                                {/* <a href="/signin" className="block text-zinc-900 dark:text-gray-200">Sign in</a> */}
+                                <Link to='/signin' className="block text-zinc-900 dark:text-gray-200">Sign in</Link>
                             </li>
                             <li>
                                 {isLoggedIn && (
