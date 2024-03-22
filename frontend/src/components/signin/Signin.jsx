@@ -38,10 +38,6 @@ export const Signin = () => {
             <div className="min-h-screen flex justify-center items-center bg-gray-100">
                 <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
                     <h1 className="text-3xl font-semibold mb-4">Sign in</h1>
-                    <p className="text-gray-600 mb-4">
-                        New here? <a href="/register" className="text-blue-500"
-                        >Create an account</a>
-                    </p>
                     <form onSubmit={handleSignIn}>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700"

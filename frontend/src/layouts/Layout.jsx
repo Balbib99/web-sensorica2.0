@@ -20,28 +20,6 @@ function Layout(props) {
         }
     }, [location]);
 
-    // const handleSignOut = async () => {
-
-    //     try {
-
-    //         const { error } = await supabase.auth.signOut()
-    //         console.log(error);
-
-    //         // Verificar si se han recibido los datos correctamente
-    //         if (error == null) {
-
-    //             setIsLoggedIn(false);
-    //             navigate('/signin');
-
-    //         }
-
-    //     } catch (error) {
-
-    //         console.error('Error al desloguear usuario', error);
-
-    //     }
-    // };
-
     return (
         <>
             <nav className="border-b bg-white dark:bg-zinc-800 dark:border-zinc-700">
