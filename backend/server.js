@@ -1,48 +1,3 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 5000;
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const axios = require('axios');
-
-// Se requiere si se quieren utilizar variables de entorno
-require('dotenv').config();
-
-// Libreria para el uso de inicio de sesión por autenticación
-// const supabase = require('./lib/supabase')
-
-// Configuración de las cors para el acceso desde cualquier sitio
-const allowedOrigins = ['http://web-sensorica.com:80']; // Lista de orígenes permitidos
-
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('El origen de la solicitud no está permitido por CORS'));
-        }
-    },
-    credentials: true // Habilitar el envío de cookies y otros credenciales
-};
-
-app.use(cors(corsOptions));
-
-app.use(cookieParser())
-
-// Configuración de body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-    res.send('¡Hola desde el servidor!');
-});
-
-app.get('/api/data', (req, res) => {
-    // Lógica para obtener datos
-    res.json({ message: 'Datos obtenidos desde el backend' });
-});
-
 // // Endpoint para manejar la autenticación
 // app.post('/api/auth/signin', async (req, res) => {
 //     console.log(req.body);
@@ -96,6 +51,39 @@ app.get('/api/data', (req, res) => {
 //         res.status(400).json({ error: 'Usuario no logueado', message: error.message });
 //     }
 // });
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 5000;
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const axios = require('axios');
+
+// Se requiere si se quieren utilizar variables de entorno
+require('dotenv').config();
+
+// Configuración de las cors para el acceso desde cualquier sitio
+const corsOptions = {
+    origin: '*', // Permitir solicitudes desde cualquier origen
+    credentials: true // Habilitar el envío de cookies y otros credenciales
+};
+
+app.use(cors(corsOptions));
+
+app.use(cookieParser())
+
+// Configuración de body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+    res.send('¡Hola desde el servidor!');
+});
+
+app.get('/api/data', (req, res) => {
+    // Lógica para obtener datos
+    res.json({ message: 'Datos obtenidos desde el backend' });
+});
 
 app.get('/api/auth/datos-contaminantes', async (req, res) => {
     const { idEstacion, idContaminante } = req.query;
@@ -116,3 +104,4 @@ app.get('/api/auth/datos-contaminantes', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
