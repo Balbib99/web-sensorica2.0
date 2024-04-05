@@ -13,7 +13,7 @@ require('dotenv').config();
 // const supabase = require('./lib/supabase')
 
 // Configuración de las cors para el acceso desde cualquier sitio
-const allowedOrigins = ['http://localhost:80']; // Lista de orígenes permitidos
+const allowedOrigins = ['http://web-sensorica.com:80']; // Lista de orígenes permitidos
 
 const corsOptions = {
     origin: function (origin, callback) {
