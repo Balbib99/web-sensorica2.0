@@ -22,7 +22,7 @@ export const ContaminantesExteriores = ({ idEstacion, idContaminante }) => {
     return (
         <div>
             <h2>Datos de contaminantes exteriores:</h2>
-            <pre>{data}</pre>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
     );
 };

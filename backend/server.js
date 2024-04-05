@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const axios = require('axios');
 
 // Se requiere si se quieren utilizar variables de entorno
 require('dotenv').config();
@@ -12,7 +13,7 @@ require('dotenv').config();
 // const supabase = require('./lib/supabase')
 
 // Configuración de las cors para el acceso desde cualquier sitio
-const allowedOrigins = ['http://localhost:*']; // Lista de orígenes permitidos
+const allowedOrigins = ['http://localhost:80']; // Lista de orígenes permitidos
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -101,8 +102,8 @@ app.get('/api/auth/datos-contaminantes', async (req, res) => {
     const url = `https://www.valladolid.es/valladolid-client/cm/valladolid/Last24HData.1.1.tkContent.365944/obtener-graficas-dia?idEstacion=${idEstacion}&idContaminante=${idContaminante}`;
 
     try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await axios.get(url);
+        const data = response.data;
         console.log(data);
 
         res.json(data);
