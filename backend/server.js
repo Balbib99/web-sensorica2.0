@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 // Libreria para el uso de inicio de sesión por autenticación
-const supabase = require('./lib/supabase')
+// const supabase = require('./lib/supabase')
 
 // Configuración de las cors para el acceso desde cualquier sitio
 const allowedOrigins = ['http://localhost:3000']; // Lista de orígenes permitidos
@@ -42,59 +42,59 @@ app.get('/api/data', (req, res) => {
     res.json({ message: 'Datos obtenidos desde el backend' });
 });
 
-// Endpoint para manejar la autenticación
-app.post('/api/auth/signin', async (req, res) => {
-    console.log(req.body);
-    const { email, password } = req.body;
+// // Endpoint para manejar la autenticación
+// app.post('/api/auth/signin', async (req, res) => {
+//     console.log(req.body);
+//     const { email, password } = req.body;
 
-    try {
+//     try {
 
-        if (!email || !password) {
+//         if (!email || !password) {
 
-            res.status(400).json({ error: 'Falta el email y/o la contraseña en la solicitud de autenticación', message: error.message });
+//             res.status(400).json({ error: 'Falta el email y/o la contraseña en la solicitud de autenticación', message: error.message });
 
-        }
+//         }
 
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        });
+//         const { data, error } = await supabase.auth.signInWithPassword({
+//             email,
+//             password,
+//         });
 
-        // Si la autenticación es exitosa, puedes enviar una respuesta al cliente
-        // Incluir las cookies en la respuesta
-        res.status(200).json({ message: 'Usuario correcto' });
+//         // Si la autenticación es exitosa, puedes enviar una respuesta al cliente
+//         // Incluir las cookies en la respuesta
+//         res.status(200).json({ message: 'Usuario correcto' });
 
-    } catch (error) {
+//     } catch (error) {
 
-        res.status(500).json({ error: 'Error de autenticación', message: error.message });
+//         res.status(500).json({ error: 'Error de autenticación', message: error.message });
 
-    }
-});
+//     }
+// });
 
-app.get('/api/auth/signout', async (req, res) => {
-    // Eliminar sesión
-    const { error } = await supabase.auth.signOut()
+// app.get('/api/auth/signout', async (req, res) => {
+//     // Eliminar sesión
+//     const { error } = await supabase.auth.signOut()
 
-    if (!error) {
-        res.status(200).json({ message: 'Usuario deslogueado' });
-    } else {
-        console.error('Error al desloguear usuario:', error);
-        res.status(500).json({ error: 'Error al desloguear usuario', message: error.message });
-    }
-});
+//     if (!error) {
+//         res.status(200).json({ message: 'Usuario deslogueado' });
+//     } else {
+//         console.error('Error al desloguear usuario:', error);
+//         res.status(500).json({ error: 'Error al desloguear usuario', message: error.message });
+//     }
+// });
 
 
-app.get('/api/auth/isLoged', async (req, res) => {
+// app.get('/api/auth/isLoged', async (req, res) => {
 
-    // Creamos una sesión si el usuario está logueado
-    const currentSession = supabase.auth.getSession();
+//     // Creamos una sesión si el usuario está logueado
+//     const currentSession = supabase.auth.getSession();
 
-    if (currentSession) {
-        res.status(200).json({ message: 'El usuario está logueado' })
-    } else {
-        res.status(400).json({ error: 'Usuario no logueado', message: error.message });
-    }
-});
+//     if (currentSession) {
+//         res.status(200).json({ message: 'El usuario está logueado' })
+//     } else {
+//         res.status(400).json({ error: 'Usuario no logueado', message: error.message });
+//     }
+// });
 
 app.get('/api/auth/datos-contaminantes', async (req, res) => {
     const { idEstacion, idContaminante } = req.query;
