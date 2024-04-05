@@ -96,6 +96,22 @@ app.get('/api/auth/isLoged', async (req, res) => {
     }
 });
 
+app.get('/api/auth/datos-contaminantes', async (req, res) => {
+    const { idEstacion, idContaminante } = req.query;
+    const url = `https://www.valladolid.es/valladolid-client/cm/valladolid/Last24HData.1.1.tkContent.365944/obtener-graficas-dia?idEstacion=${idEstacion}&idContaminante=${idContaminante}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: 'Error fetching data' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

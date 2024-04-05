@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createClient } from '@supabase/supabase-js';
 import { Sensores } from '../sensores/Sensores';
 import { SearchSaveMeasurement } from '../sensores/SearchSaveMeasurement';
+import { ContaminantesExteriores } from '../sensores/ContaminantesExteriores';
 
 export const Dashboard = () => {
 
@@ -60,6 +61,10 @@ export const Dashboard = () => {
                 maxValue="100"
                 minValue="10"
             /> */}
+            <ContaminantesExteriores 
+              idEstacion="arco"
+              idContaminante="PM25"
+            />
         </div>
         <div className="min-h-screen flex justify-center items-center">
             <SearchSaveMeasurement />
