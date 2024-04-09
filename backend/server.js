@@ -57,7 +57,15 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// Configurar CORS
+const corsOptions = {
+    origin: 'https://web-sensorica.com', // Especifica el dominio permitido (reemplaza con tu dominio real)
+    methods: 'GET,POST', // Especifica los métodos HTTP permitidos
+    allowedHeaders: 'Content-Type,Authorization', // Especifica las cabeceras permitidas
+    credentials: true // Habilita el intercambio de cookies a través de dominios (requiere configuración adicional en el cliente)
+};
+
+app.use(cors(corsOptions));
 
 // Se requiere si se quieren utilizar variables de entorno
 require('dotenv').config();
