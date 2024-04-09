@@ -63,14 +63,13 @@ const PORT = process.env.PORT || 5000;
 
 // Configurar CORS
 const corsOptions = {
-    origin: 'https://web-sensorica.com', // Especifica el dominio permitido (reemplaza con tu dominio real)
-    methods: 'GET,POST', // Especifica los métodos HTTP permitidos
-    allowedHeaders: 'Content-Type,Authorization', // Especifica las cabeceras permitidas
-    credentials: true // Habilita el intercambio de cookies a través de dominios (requiere configuración adicional en el cliente)
+    origin: ['https://web-sensorica.com', 'https://localhost:443', 'http://localhost:5000'],
+    methods: ['GET', 'POST'], // Puedes ajustar los métodos permitidos según tus necesidades
+    allowedHeaders: ['Content-Type', 'Authorization'], // Puedes ajustar las cabeceras permitidas según tus necesidades
+    credentials: true // Habilita el intercambio de cookies a través de dominios
 };
 
-// Manejar solicitudes OPTIONS para preflight
-app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Middleware para manejar errores de CORS
 app.use((err, req, res, next) => {
