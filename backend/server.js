@@ -55,32 +55,18 @@
 // app.js
 
 const express = require('express');
-const cors = require('cors');
-
-require('dotenv').config();
+const https = require('https');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configurar CORS
-const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-    exposedHeaders: 'Access-Control-Allow-Private-Network'
-};
+// Configurar la ruta del certificado y la clave privada
+const key = fs.readFileSync('key.pem');
+const cert = fs.readFileSync('cert.pem');
 
-app.use(cors(corsOptions));
-
-// Middleware para manejar errores de CORS de manera general
-app.use((err, req, res, next) => {
-    if (err) {
-        res.status(403).json({ error: 'CORS Error: ' + err.message });
-    } else {
-        next();
-    }
-});
+// Configurar el servidor HTTPS
+const server = https.createServer({ key: key, cert: cert }, app);
 
 // Llamamos al router
 app.use('/', require('./routes/router'));
