@@ -52,56 +52,21 @@
 //     }
 // });
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const axios = require('axios');
+
+app.use(cors());
 
 // Se requiere si se quieren utilizar variables de entorno
 require('dotenv').config();
 
-// Configuración de las cors para el acceso desde cualquier sitio
-const corsOptions = {
-    origin: '*', // Permitir solicitudes desde cualquier origen
-    credentials: true // Habilitar el envío de cookies y otros credenciales
-};
-
-app.use(cors(corsOptions));
-
-app.use(cookieParser())
-
-// Configuración de body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-    res.send('¡Hola desde el servidor!');
-});
-
-app.get('/api/data', (req, res) => {
-    // Lógica para obtener datos
-    res.json({ message: 'Datos obtenidos desde el backend' });
-});
-
-app.get('/api/auth/datos-contaminantes', async (req, res) => {
-    const { idEstacion, idContaminante } = req.query;
-    const url = `https://www.valladolid.es/valladolid-client/cm/valladolid/Last24HData.1.1.tkContent.365944/obtener-graficas-dia?idEstacion=${idEstacion}&idContaminante=${idContaminante}`;
-
-    try {
-        const response = await axios.get(url);
-        const data = response.data;
-        console.log(data);
-
-        res.json(data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Error fetching data' });
-    }
-});
+//Llamamos al router
+app.use('/', require('./routes/router'))
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
 

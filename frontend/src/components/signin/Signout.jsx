@@ -4,29 +4,38 @@ import { useNavigate } from 'react-router-dom';
 
 export const Signout = () => {
 
-    const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
+    // const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const signOutUser = async () => {
-            try {
-                const { error } = await supabase.auth.signOut()
-                console.log(error);
+        // const signOutUser = async () => {
+        //     try {
+        //         const { error } = await supabase.auth.signOut()
+        //         console.log(error);
 
-                // Verificar si se han recibido los datos correctamente
-                if (error == null) {
-                    navigate('/signin');
-                }
+        //         // Verificar si se han recibido los datos correctamente
+        //         if (error == null) {
+        //             navigate('/signin');
+        //         }
 
-            } catch (error) {
-                console.error('Error al desloguear usuario', error);
-            }
-        };
+        //     } catch (error) {
+        //         console.error('Error al desloguear usuario', error);
+        //     }
+        // };
 
-        signOutUser(); // Llamar a la función de cierre de sesión al cargar el componente
+        // signOutUser(); // Llamar a la función de cierre de sesión al cargar el componente
 
-    }, [navigate, supabase.auth]);
+        if (localStorage.getItem('token')) {
+
+            //Eliminamos el token para no poder volver a entrar
+            localStorage.removeItem('token')
+
+            //Redirigimos a la pagina de login
+            navigate('/signin')
+        }
+
+    }, []);
 
     return null; // Devolver null ya que este componente no renderiza nada
 }
