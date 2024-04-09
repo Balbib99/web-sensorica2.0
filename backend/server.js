@@ -66,7 +66,8 @@ const corsOptions = {
     origin: ['https://web-sensorica.com', 'https://localhost:443', 'http://localhost:5000'],
     methods: ['GET', 'POST'], // Puedes ajustar los métodos permitidos según tus necesidades
     allowedHeaders: ['Content-Type', 'Authorization'], // Puedes ajustar las cabeceras permitidas según tus necesidades
-    credentials: true // Habilita el intercambio de cookies a través de dominios
+    credentials: true, // Habilita el intercambio de cookies a través de dominios
+    exposedHeaders: 'Access-Control-Allow-Private-Network' // Exponer el encabezado personalizado
 };
 
 app.use(cors(corsOptions));
