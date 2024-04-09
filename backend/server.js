@@ -51,8 +51,12 @@
 //         res.status(400).json({ error: 'Usuario no logueado', message: error.message });
 //     }
 // });
+
 const express = require('express');
 const cors = require('cors');
+
+// Se requiere si se quieren utilizar variables de entorno
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -65,10 +69,17 @@ const corsOptions = {
     credentials: true // Habilita el intercambio de cookies a través de dominios (requiere configuración adicional en el cliente)
 };
 
-app.use(cors(corsOptions));
+// Manejar solicitudes OPTIONS para preflight
+app.options('*', cors(corsOptions));
 
-// Se requiere si se quieren utilizar variables de entorno
-require('dotenv').config();
+// Middleware para manejar errores de CORS
+app.use((err, req, res, next) => {
+    if (err.name === 'CorsError') {
+        res.status(403).json({ error: 'CORS Error: ' + err.message });
+    } else {
+        next(err);
+    }
+});
 
 //Llamamos al router
 app.use('/', require('./routes/router'))
