@@ -11,6 +11,7 @@ export const Signin = () => {
     const navigate = useNavigate();
 
     const backend_url = process.env.REACT_APP_BACKEND_URL;
+    console.log(backend_url);
 
     const [formData, setFormData] = useState({
         email: '',
