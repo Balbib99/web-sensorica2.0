@@ -97,9 +97,6 @@ export const Sensores = ({ parameter, id, maxValue, minValue }) => {
 
         if (typeof document !== 'undefined') {
 
-            // var ctx = document.querySelector(selector).getContext('2d');
-            // Resto del código que utiliza document aquí
-
             var canvas = document.querySelector(selector);
 
             if (!canvas) {

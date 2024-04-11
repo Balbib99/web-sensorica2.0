@@ -15,14 +15,6 @@ export const Routing = () => {
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='register' element={<Register />} />
                 <Route path='signout' element={<Signout />} />
-
-                {/* <Route path='/social' element={<PrivateLayout />}>
-                    <Route index element={<Rpc />} />
-                    <Route path='rpc' element={<Rpc />} />
-                    <Route path='ctu' element={<Ctu />} />
-                    <Route path='contact' element={<Contact />} />
-                    <Route path='file' element={<File />} />
-                </Route> */}
             </Routes>
         </BrowserRouter>
     )

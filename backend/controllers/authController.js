@@ -2,10 +2,6 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const connection = require('../database/db');
 
-const { promisify } = require('util');
-
-
-
 // Método de registro
 exports.register = async (req, res) => {
   try {

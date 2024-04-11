@@ -1,39 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../layouts/Layout';
 import { useNavigate } from "react-router-dom";
-import { createClient } from '@supabase/supabase-js';
 import { Sensores } from '../sensores/Sensores';
 import { SearchSaveMeasurement } from '../sensores/SearchSaveMeasurement';
 import { ContaminantesExteriores } from '../sensores/ContaminantesExteriores';
-import { Signin } from '../signin/Signin';
 
 export const Dashboard = () => {
 
-  // const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY)
-
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const checkLoggedIn = async () => {
-
-  //     try {
-  //       // Creamos una sesión si el usuario está logueado
-  //       const currentSession = supabase.auth.getSession();
-  //       console.log(currentSession);
-
-  //       if ((await currentSession).data.session == null) {
-
-  //         navigate('/signin')
-
-  //       }
-
-  //     } catch (error) {
-
-  //     }
-  //   };
-
-  //   checkLoggedIn();
-  // }, []);
 
   const decodeJWT = (token) => {
 

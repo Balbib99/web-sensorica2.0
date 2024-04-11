@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 function Layout(props) {
 
-    // const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
-
     const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const navigate = useNavigate();
 
     useEffect(() => {
         // Verificar si la ruta actual no es "/signin"
