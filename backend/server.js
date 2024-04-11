@@ -15,7 +15,10 @@ const PORT = process.env.PORT || 5000;
 // const server = https.createServer({ key: key, cert: cert }, app);
 
 // Middleware para permitir CORS
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
+
 
 // Llamamos al router
 app.use('/', require('./routes/router'));
